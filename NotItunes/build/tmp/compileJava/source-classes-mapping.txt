@@ -1,0 +1,12 @@
+no/noroff/sean/fakeapi/models/Artist.java
+ no.noroff.sean.fakeapi.models.Artist
+no/noroff/sean/fakeapi/models/fakedb/Database.java
+ no.noroff.sean.fakeapi.models.fakedb.Database
+com/gitlab/lianadalia/task4/Task4Application.java
+ com.gitlab.lianadalia.task4.Task4Application
+no/noroff/sean/fakeapi/models/Customer.java
+ no.noroff.sean.fakeapi.models.Customer
+com/gitlab/lianadalia/task4/controllers/CustomerController.java
+ com.gitlab.lianadalia.task4.controllers.CustomerController
+com/gitlab/lianadalia/task4/controllers/HelloController.java
+ com.gitlab.lianadalia.task4.controllers.HelloController
