@@ -1,55 +1,68 @@
 package com.gitlab.lianadalia.task4.controllers;
 
 
+import java.util.Random;
 import no.noroff.sean.fakeapi.models.Artist;
-import no.noroff.sean.fakeapi.models.Customer;
 import no.noroff.sean.fakeapi.models.fakedb.Database;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class HelloController {
 
+    private Database database = new Database();
+    Random random = new Random();
+
     @GetMapping("/")
-    public String index() {
+    public String index() { //displays root page works
         System.out.println("/ was accessed");
-        return "<h1>This is the root page</h1>";
+        //return "<h1>This is the root page</h1>";
+        return "index"; //<-trying to match template html file
 
     }
-    @GetMapping("/hello")
+
+    @GetMapping("/hello") //displays hello works
     public String greetGuest() {
         return "Hello, guest!";
     }
 
-    //Read all the customers in the “database”,
-    @GetMapping("/customer")
-    public String customer() {
-       // Customer.getId();
-        //Customer.getLastName();
-
-        return "index";
-    }
-
-    // searching for artists matching a specific search term.
+    //search for artist // works and shows
     @GetMapping("/search")
-    public String simpleSearch(@RequestParam(name = "search") String search, Model model) {
-      //  model.addAttribute("artistList", Database.getArtists(search));
-        //model.addAttribute("genre", Database.getGenre(search));
-        return "search";
+    public Artist simpleSearch(@RequestParam(name = "searchterm") String artistName) {
+        List<Artist> artists = database.getArtists();
+        int x =-1;
+        for(int i =0; i < artists.size(); i++) {    //loops through artist
+            if (artists.get(i).getArtistName().equals(artistName)) { //if artist name is equal it stops
+                x =i;
+                break;
+            }
+        }
+        Artist artist = null;
+        if (x!=-1){
+            artist=artists.get(x);
+
+        }
+        return artist;
     }
 
-    // returning five random artists ->not sure
-    // @GetMapping("/returnartist")
-    // public String getArtistName(Model model) {
-    // model.addAttribute("artists", Artist.getArtistName());
-    //return "artist";
+    // returning five random artists ->working and showing
+    @GetMapping("/returnartist")
+    public List<Artist> getRandomArtists() {
+        // need to get list size
+        List<Artist> random_artists = new ArrayList<>();
+        while(true) { //loop to go through the artist arraylist
+            int artistindex = random.nextInt((database.getArtists().size()));//trying to get random artist
+            if(!random_artists.contains(database.getArtists().get(artistindex))){ //checking for duplicates
+                random_artists.add(database.getArtists().get(artistindex));
+            }
+            if(random_artists.size()==5) {
+                break;
+            }
 
-    // This function returns all the artist in the database ->not sure
-    // @RequestMapping(value="/artist", method = RequestMethod.GET)
-    //public ArrayList<artist> getArtistName(){
-    //  return getArtistName();
-    //}
-    //}
-
+        }
+        return random_artists;
+    }
 
 }
