@@ -13,7 +13,7 @@ public class CustomerController {
 
     private Database database = new Database();
 
-    //reads all the customers data //works and shows
+    //reads all the customers data
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public List<Customer> getCustomers() {
         List<Customer> customers = database.getCustomers();
@@ -22,7 +22,7 @@ public class CustomerController {
 
     }
 
-    // This adds a new customer. It takes the new customer from the body of the request.//works
+    // This adds a new customer. It takes the new customer from the body of the request.
     @RequestMapping(value="/customers", method = RequestMethod.POST)
     public Customer addNewCustomer(@RequestBody Customer customer){
         List<Customer> customers = database.getCustomers();
@@ -33,7 +33,7 @@ public class CustomerController {
                 addedCustomer = cust;
             }
         }
-        return addedCustomer; //returns newly created customer //might work not sure yet
+        return addedCustomer; //returns newly created customer
     }
     // This updates an existing customer.//works and shows on the API PUT http://localhost:8080/customers/1
    @RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
@@ -55,7 +55,7 @@ public class CustomerController {
 
        }
 
-    //deletes customer //not showing not sure if works
+    //deletes customer
     @RequestMapping(value="/customers/{id}", method = RequestMethod.DELETE)
     public String deleteCustomer(@PathVariable int id){
 

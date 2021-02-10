@@ -47,7 +47,7 @@ public class HelloController {
         return artist;
     }
 
-    // returning five random artists ->working and showing
+    // returning five random artists
     @GetMapping("/returnartist")
     public List<Artist> getRandomArtists() {
         // need to get list size
